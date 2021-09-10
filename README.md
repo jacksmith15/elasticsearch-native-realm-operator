@@ -4,6 +4,10 @@ Kubernetes operator for managing Elasticsearch native realm users.
 
 See [deploy/](./deploy) for a local deployment demo.
 
+## TODO
+- [ ] Manage roles via CRD too
+- [ ] Allow passing `hashed_password` in the CRD
+
 ## Installation
 
 This project is not currently packaged and so must be installed manually.
