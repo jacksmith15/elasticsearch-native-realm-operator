@@ -1,0 +1,62 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+  namespace: elasticsearch
+spec:
+  version: 7.14.1
+  auth:
+    roles:
+      - secretName: elasticsearch-roles
+    fileRealm:
+      - secretName: elasticsearch-users
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.store.allow_mmap: false
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elasticsearch-roles
+  namespace: elasticsearch
+stringData:
+  roles.yml: |-
+    security_management:
+      cluster: [ 'manage_security' ]
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elasticsearch-users
+  namespace: elasticsearch
+stringData:
+  users: |-
+    native-realm-operator:$2a$10$FTrzjEBt0n.iVAq.PRkoMeSpcCY8iqcNHB7Yhs2kw64BVkqdIT.Zi
+    admin:$2a$10$P.NP/gbsOX1bWU2d4qTjj.0DhV2z0gC743cvB.8FQWcWNRX2u664e
+  users_roles: |-
+    security_management:native-realm-operator
+    superuser:admin
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elasticsearch-native-realm-operator-credentials
+  namespace: elasticsearch
+stringData:
+  username: native-realm-operator
+  password: db2c2b1f-64f4-4727-ba06-d23f2c624a17
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elasticsearch-admin-credentials
+  namespace: elasticsearch
+stringData:
+  username: admin
+  password: 7c2e885a-eb23-4204-85cf-070d27bab5c1

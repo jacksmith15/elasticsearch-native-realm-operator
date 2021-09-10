@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: native-realm-operator
+  namespace: elastic-system
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      component: native-realm-operator
+  template:
+    metadata:
+      labels:
+        component: native-realm-operator
+    spec:
+      serviceAccountName: native-realm-operator
+      containers:
+      - name: native-realm-operator
+        image: localhost:5005/elasticsearch-native-realm-operator:latest
+        ports: []
+        env:
+        - name: ELASTICSEARCH_HOSTS
+          value: '["http://elasticsearch-es-http.elasticsearch:9200"]'
+        - name: ELASTICSEARCH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-native-realm-operator-credentials
+              key: username
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-native-realm-operator-credentials
+              key: password
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elasticsearch-native-realm-operator-credentials
+  namespace: elastic-system
+stringData:
+  username: native-realm-operator
+  password: db2c2b1f-64f4-4727-ba06-d23f2c624a17

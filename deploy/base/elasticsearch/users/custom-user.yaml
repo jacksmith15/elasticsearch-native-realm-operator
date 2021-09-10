@@ -1,0 +1,9 @@
+apiVersion: elasticsearchnativerealm.ckpd.co/v1
+kind: ElasticsearchNativeRealmUser
+metadata:
+  namespace: elasticsearch
+  name: custom-user
+spec:
+  username: custom-user
+  roles: [viewer]
+  email: custom-user@example.com
