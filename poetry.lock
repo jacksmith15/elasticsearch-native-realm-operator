@@ -296,6 +296,14 @@ qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["Django (<3.1)", "colorama", "docopt", "pytest (<6.0.0)"]
 
 [[package]]
+name = "jsonpointer"
+version = "2.1"
+description = "Identify specific nodes in a JSON document (RFC 6901)"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[[package]]
 name = "kopf"
 version = "1.33.0"
 description = "Kubernetes Operator Pythonic Framework (Kopf)"
@@ -768,7 +776,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "8cbcb25adb3a475a9101ed87c8b7c1ea934d576c67c4ff0b661566d51c476272"
+content-hash = "d218323de2407c0a1fb3d78f4115e3d2251dc100582fd1fd53902c4dcdda4bda"
 
 [metadata.files]
 aiohttp = [
@@ -959,6 +967,10 @@ iso8601 = [
 jedi = [
     {file = "jedi-0.18.0-py2.py3-none-any.whl", hash = "sha256:18456d83f65f400ab0c2d3319e48520420ef43b23a086fdc05dff34132f0fb93"},
     {file = "jedi-0.18.0.tar.gz", hash = "sha256:92550a404bad8afed881a137ec9a461fed49eca661414be45059329614ed0707"},
+]
+jsonpointer = [
+    {file = "jsonpointer-2.1-py2.py3-none-any.whl", hash = "sha256:150f80c5badd02c757da6644852f612f88e8b4bc2f9852dcbf557c8738919686"},
+    {file = "jsonpointer-2.1.tar.gz", hash = "sha256:5a34b698db1eb79ceac454159d3f7c12a451a91f6334a4f638454327b7a89962"},
 ]
 kopf = [
     {file = "kopf-1.33.0-py3-none-any.whl", hash = "sha256:1d7de52f3307765118906c6189a5c5a96c94a555aaa2ddddb38ff3dd7c1e405c"},

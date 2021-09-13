@@ -17,6 +17,7 @@ elasticsearch = "^7.12"
 pydantic = "^1.8"
 furl = "^2.1"
 kubernetes = "^18.20"
+jsonpointer = "^2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.3"
