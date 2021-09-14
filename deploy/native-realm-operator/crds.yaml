@@ -1,0 +1,241 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: elasticsearchnativerealmroles.elasticsearchnativerealm.ckpd.co
+spec:
+  group: elasticsearchnativerealm.ckpd.co
+  names:
+    categories: null
+    kind: ElasticsearchNativeRealmRole
+    listKind: null
+    plural: elasticsearchnativerealmroles
+    shortNames: null
+    singular: elasticsearchnativerealmrole
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns: []
+    name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources '
+            title: Apiversion
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds '
+            title: Kind
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              role:
+                properties:
+                  applications:
+                    description: A list of application privilege entries.
+                    items:
+                      properties:
+                        application:
+                          description: The name of the application to which this entry
+                            applies.
+                          title: Application
+                          type: string
+                        privileges:
+                          description: A list of strings, where each element is the
+                            name of an application privilege or action.
+                          items:
+                            type: string
+                          title: Privileges
+                          type: array
+                        resources:
+                          description: A list resources to which the privileges are
+                            applied.
+                          items:
+                            type: string
+                          title: Resources
+                          type: array
+                      required:
+                      - application
+                      title: ElasticsearchNativeRealmRoleApplicationPrivilegeEntry
+                      type: object
+                    title: Applications
+                    type: array
+                  cluster:
+                    description: A list of cluster privileges. These privileges define
+                      the cluster level actions that users with this role are able
+                      to execute.
+                    items:
+                      type: string
+                    title: Cluster
+                    type: array
+                  indices:
+                    description: A list of indices permissions entries.
+                    items:
+                      properties:
+                        field_security:
+                          description: The document fields that the owners of the
+                            role have read access to. For more information, see https://www.elastic.co/guide/en/elasticsearch/reference/7.14/field-and-document-access-control.html.
+                          title: Field Security
+                          type: object
+                        names:
+                          description: A list of indices (or index name patterns)
+                            to which the permissions in this entry apply.
+                          items:
+                            type: string
+                          title: Names
+                          type: array
+                        privileges:
+                          description: The index level privileges that the owners
+                            of the role have on the specified indices.
+                          items:
+                            type: string
+                          title: Privileges
+                          type: array
+                        query:
+                          description: A search query that defines the documents the
+                            owners of the role have read access to. A document within
+                            the specified indices must match this query in order for
+                            it to be accessible by the owners of the role.
+                          title: Query
+                          type: string
+                      required:
+                      - names
+                      - privileges
+                      title: ElasticsearchNativeRealmRoleIndicesPermissionsEntry
+                      type: object
+                    title: Indices
+                    type: array
+                  metadata:
+                    description: Optional meta-data. Within the metadata object, keys
+                      that begin with _ are reserved for system usage. Note that metadata
+                      will be used to track management of the role via the operator.
+                    title: Metadata
+                    type: object
+                  name:
+                    description: The name of the role.
+                    title: Name
+                    type: string
+                  run_as:
+                    description: A list of users that the owners of this role can
+                      impersonate. For more information, see https://www.elastic.co/guide/en/elasticsearch/reference/7.14/run-as-privilege.html.
+                    items:
+                      type: string
+                    title: Run As
+                    type: array
+                required:
+                - name
+                title: ElasticsearchNativeRealmRoleSpecRole
+                type: object
+            required:
+            - role
+            title: ElasticsearchNativeRealmRoleSpec
+            type: object
+        required:
+        - apiVersion
+        - kind
+        - spec
+        title: ElasticsearchNativeRealmRole
+        type: object
+        x-kubernetes-preserve-unknown-fields: true
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: elasticsearchnativerealmusers.elasticsearchnativerealm.ckpd.co
+spec:
+  group: elasticsearchnativerealm.ckpd.co
+  names:
+    categories: null
+    kind: ElasticsearchNativeRealmUser
+    listKind: null
+    plural: elasticsearchnativerealmusers
+    shortNames: null
+    singular: elasticsearchnativerealmuser
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns: []
+    name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources '
+            title: Apiversion
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds '
+            title: Kind
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              secretName:
+                title: Secretname
+                type: string
+              user:
+                properties:
+                  email:
+                    description: The email of the user (optional).
+                    title: Email
+                    type: string
+                  enabled:
+                    default: true
+                    description: Specifies whether the user is enabled. The default
+                      value is `true`.
+                    title: Enabled
+                    type: boolean
+                  full_name:
+                    description: The full name of the user (optional).
+                    title: Full Name
+                    type: string
+                  metadata:
+                    description: Arbitrary metadata that you want to associate with
+                      the user.  Note that metadata will be used to track management
+                      of the user via the operator.
+                    title: Metadata
+                    type: object
+                  roles:
+                    description: 'A set of roles the user has. The roles determine
+                      the user''s access permissions. To create a user without any
+                      roles, specify and empty list: ''[]''.'
+                    items:
+                      type: string
+                    title: Roles
+                    type: array
+                  username:
+                    description: An identifer for the user.
+                    maxLength: 1024
+                    minLength: 1
+                    title: Username
+                    type: string
+                required:
+                - username
+                - roles
+                title: ElasticsearchNativeRealmUserSpecUser
+                type: object
+            required:
+            - user
+            - secretName
+            title: ElasticsearchNativeRealmUserSpec
+            type: object
+        required:
+        - apiVersion
+        - kind
+        - spec
+        title: ElasticsearchNativeRealmUser
+        type: object
+        x-kubernetes-preserve-unknown-fields: true
+    served: true
+    storage: true

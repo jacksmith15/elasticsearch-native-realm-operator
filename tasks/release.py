@@ -26,7 +26,8 @@ def build(ctx, version="dev"):
 
 
 @task(pre=[build])
-def push(ctx, registry="localhost:5005", version="dev"):
+def push(ctx, registry, version="dev"):
+    """Build and push docker image to specified registry with specified tag."""
     if version == "package":
         version = package.__version__
     tag = f"{registry}/elasticsearch-native-realm-operator:{version}"

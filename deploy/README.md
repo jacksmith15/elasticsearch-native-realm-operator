@@ -32,12 +32,18 @@ kustomize build base | kubectl apply -f -
 
 You'll want to wait until all services are running, this could take some time.  Kibana will become available at [localhost:5005].
 
+### Deploy the operator
+
+```shell
+kustomize build native-realm-operator | kubectl apply -f -
+```
+
 ## Try out the operator
 
 An example Elasticsearch user resource is available in [custom-user.yaml](base/elasticsearch/users/custom-user.yaml).  Test out creating this with:
 
 ```shell
-kustomize build base/elasticsearch/users | kubectl apply -f -
+kustomize build native-realm/elasticsearch/users | kubectl apply -f -
 ```
 
 This will:
@@ -47,7 +53,7 @@ This will:
 Extract the generated password using:
 
 ```shell
-kubectl get secret -n elasticsearch elasticsearch-credentials-custom-user -o json | jq -r '.data.password' | base64 -d
+kubectl get secret -n elasticsearch elasticsearch-custom-user-credentials -o json | jq -r '.data.password' | base64 -d
 ```
 
 And use this to login on Kibana.

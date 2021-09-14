@@ -1,0 +1,12 @@
+apiVersion: elasticsearchnativerealm.ckpd.co/v1
+kind: ElasticsearchNativeRealmRole
+metadata:
+  namespace: elasticsearch
+  name: custom-reader
+spec:
+  role:
+    name: custom-reader
+    cluster: [ 'monitor' ]
+    indices:
+    - names: [ 'prefix.*' ]
+      privileges: [ 'read', 'view_index_metadata' ]

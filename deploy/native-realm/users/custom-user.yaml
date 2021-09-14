@@ -4,6 +4,8 @@ metadata:
   namespace: elasticsearch
   name: custom-user
 spec:
-  username: custom-user
-  roles: [viewer]
-  email: custom-user@example.com
+  user:
+    username: custom-user
+    roles: [viewer]
+    email: custom-user@example.com
+  secretName: elasticsearch-custom-user-credentials

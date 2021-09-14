@@ -2,6 +2,7 @@ from invoke import Collection
 
 from tasks.changelog_check import changelog_check
 from tasks.lint import lint
+from tasks.local import local
 from tasks.release import build, push, release
 from tasks.run import run
 from tasks.test import coverage, test
@@ -19,4 +20,5 @@ namespace = Collection(
     test,
     typecheck,
     verify,
+    local,
 )

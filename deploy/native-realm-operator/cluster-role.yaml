@@ -34,5 +34,5 @@ rules:
 
   # Application: read and handling access for watching cluster-wide.
   - apiGroups: [elasticsearchnativerealm.ckpd.co]
-    resources: [elasticsearchnativerealmusers]
+    resources: [elasticsearchnativerealmusers, elasticsearchnativerealmroles]
     verbs: [list, watch, patch]
