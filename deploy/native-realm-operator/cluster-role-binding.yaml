@@ -9,4 +9,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: native-realm-operator
-    namespace: elastic-system
+    namespace: native-realm-operator

@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: native-realm-operator
-  namespace: elastic-system
+  namespace: native-realm-operator
 spec:
   replicas: 1
   strategy:
@@ -38,7 +38,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: elasticsearch-native-realm-operator-credentials
-  namespace: elastic-system
+  namespace: native-realm-operator
 stringData:
   username: native-realm-operator
   password: db2c2b1f-64f4-4727-ba06-d23f2c624a17

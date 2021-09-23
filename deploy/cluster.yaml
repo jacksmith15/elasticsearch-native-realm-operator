@@ -1,14 +1,14 @@
 apiVersion: ctlptl.dev/v1alpha1
 kind: Registry
-name: kopf-test-registry
+name: elasticsearch-native-realm-operator-test-registry
 port: 5005
 ---
 apiVersion: ctlptl.dev/v1alpha1
 kind: Cluster
 product: kind
-registry: kopf-test-registry
+registry: elasticsearch-native-realm-operator-test-registry
 kindV1Alpha4Cluster:
-  name: kopf-test-cluster
+  name: elasticsearch-native-realm-operator-test-cluster
   nodes:
   - role: control-plane
     kubeadmConfigPatches:
