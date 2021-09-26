@@ -30,6 +30,8 @@ invoke = "^1.5.0"
 termcolor = "^1.1.0"
 pytest-cov = "^2.11.1"
 changelog-cmd = "^0.1.2"
+pytest-docker = "^0.10"
+pytest-dotenv = "^0.5"
 
 [tool.isort]
 # Setting compatible with black. See https://black.readthedocs.io/en/stable/compatible_configs.html
@@ -57,6 +59,22 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+python_functions = "should_*"
+# pytest-dotenv settings
+env_override_existing_values = 1
+env_files = ".env.test"
+
+# Structure: https://docs.pytest.org/en/stable/warnings.html
+# Values:    https://docs.python.org/3/library/warnings.html#describing-warning-filters
+#            action:message:category:module:line
+filterwarnings = [
+  "ignore:.*loop argument.*:DeprecationWarning:asyncio[.*]",
+  "ignore:.*loop argument.*:DeprecationWarning:aiojobs[.*]",
+]
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

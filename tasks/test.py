@@ -9,8 +9,8 @@ from tasks.helpers import package, print_header
 _COVERAGE_PATH = Path("reports/cover")
 
 
-@task(optional=["debug", "maxfail"])
-def test(ctx, debug=False, maxfail=0):
+@task(optional=["debug", "maxfail", "keepalive"])
+def test(ctx, debug=False, maxfail=0, keepalive=False):
     """Run tests.
 
     A non-zero return code from this task indicates some tests failed.
@@ -21,12 +21,14 @@ def test(ctx, debug=False, maxfail=0):
         f"--cov={package.__name__}",
         "--cov-branch",
         f'--cov-report="html:{_COVERAGE_PATH}"',
+        "-vv",
     ]
     if debug:
         flags.append("--capture=no")
     if maxfail:
         flags.append(f"--maxfail={int(maxfail)}")
-
+    if keepalive:
+        flags.append("--keepalive")
     ctx.run(f"pytest {' '.join(flags)} tests/", pty=True)
     print(f"\nCoverage: {get_total_coverage(ctx)}")
 
