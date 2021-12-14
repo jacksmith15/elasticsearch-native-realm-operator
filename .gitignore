@@ -153,3 +153,7 @@ Thumbs.db
 
 # profiling data
 .prof
+
+# Local infra
+images/
+kubeconfig.yaml
